@@ -23,6 +23,7 @@ public class FileUploadT {
   private final FileServer fileServer;
   private static final long MAX_FILE_SIZE = 100 * 1024 * 1024; // 100MB
   private static final long FILE_SIZE = 1024 * 1024 ; // 1MB
+  private static final long FILE_SIZE2 = 1024 * 1024 ; // 1MB
   public FileUploadT(FileServer fileServer) {
     this.fileServer = fileServer;
   }
