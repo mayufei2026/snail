@@ -56,7 +56,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/file-test")
 public class FileTestController {
 
-  private static final Logger1 logger = LoggerFactory.getLogger(FileTestController.class);
+  private static final Logger logger = LoggerFactory.getLogger(FileTestController.class);
   private final FileGenerator fileGenerator;
   private final FileUpload fileUpload;
   private static final long MAX_FILE_SIZE = 200 * 1024 * 1024; // 200MB
