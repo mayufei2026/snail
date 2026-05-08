@@ -22,7 +22,8 @@ public class FileUpload3 {
   private static final Logger logger = LoggerFactory.getLogger(FileUpload3.class);
   private final FileServer fileServer;
   private static final long MAX_FILE_SIZE = 100 * 1024 * 1024; // 100MB
-  private static final long FILE_SIZE = 1024 * 1024 ; // 1MB
+  private static final long FILE_SIZE = 1024 * 1024 * 1; // 1MB
+
   public FileUpload3(FileServer fileServer) {
     this.fileServer = fileServer;
   }
@@ -72,8 +73,8 @@ public class FileUpload3 {
    * @param fileId 文件id
    * @return InputStream 文件流
    */
-  public InputStream downloadFile(Long fileId  ,String  uuidStr) throws Exception {
-    return fileServer.downloadRequest(fileId ,uuidStr);
+  public InputStream downloadFile(Long fileId, String uuidStr) throws Exception {
+    return fileServer.downloadRequest(fileId, uuidStr);
   }
 
   /**
@@ -93,13 +94,13 @@ public class FileUpload3 {
    * @param file 文件
    * @return FileItemDto  文件元数据信息
    */
-  public FileItemDto uploadFileInChunks(File file , int splitSize) throws Exception {
+  public FileItemDto uploadFileInChunks(File file, int splitSize) throws Exception {
     // 生成唯一标识和基础信息
     String uuid = UUID.randomUUID().toString();
     String filename = file.getName();
     long fileSize = file.length();
     Long maxFileSize = MAX_FILE_SIZE;
-    if (splitSize > 0 ) {
+    if (splitSize > 0) {
       maxFileSize = splitSize * FILE_SIZE;
     }
     // 计算分片总数
