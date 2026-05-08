@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FileUpload {
 
-  private static final Logger logger = LoggerFactory.getLogger(FileUpload.class);
+  private static final Logger LOGGER  = LoggerFactory.getLogger(FileUpload.class);
   private final FileServer fileServer;
   private static final long MAX_FILE_SIZE = 100 * 1024 * 1024; // 100MB
   private static final long FILE_SIZE = 1024 * 1024 ; // 1MB
@@ -104,7 +104,7 @@ public class FileUpload {
     }
     // 计算分片总数
     int totalChunks = (int) Math.ceil((double) fileSize / maxFileSize);
-    logger.info("文件: {} (大小: {})，将被分为 {} 个分片",
+    LOGGER .info("文件: {} (大小: {})，将被分为 {} 个分片",
         filename, formatFileSize(fileSize), totalChunks);
 
     FileItemDto result = null;
@@ -126,14 +126,14 @@ public class FileUpload {
         // 创建分片输入流
         try (InputStream chunkStream = new ByteArrayInputStream(buffer)) {
           // 上传当前分片
-          logger.info("上传分片 {}/{} (大小: {})",
+          LOGGER .info("上传分片 {}/{} (大小: {})",
               currentChunk + 1, totalChunks, formatFileSize(chunkSize));
 
           result = this.uploadFile(chunkStream, currentChunk, totalChunks, uuid, filename);
 
           // 检查上传结果
           if (result != null) {
-            logger.error("分片 {} 上传成功", currentChunk + 1);
+            LOGGER .error("分片 {} 上传成功", currentChunk + 1);
             return result; // 返回错误结果
           }
         }
@@ -141,7 +141,7 @@ public class FileUpload {
       }
     }
 
-    logger.info("文件 {} 全部分片上传完成", filename);
+    LOGGER .info("文件 {} 全部分片上传完成", filename);
     return result != null ? result : new FileItemDto();
   }
 

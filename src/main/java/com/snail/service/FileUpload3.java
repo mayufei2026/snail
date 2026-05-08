@@ -22,7 +22,7 @@ public class FileUpload3 {
   private static final Logger logger = LoggerFactory.getLogger(FileUpload3.class);
   private final FileServer fileServer;
   private static final long MAX_FILE_SIZE = 100 * 1024 * 1024; // 100MB
-  private static final long FILE_SIZE = 1024 * 1024 * 1; // 1MB
+  private static final long FILE_SIZE = 1024 * 1024 * 2; // 1MB
 
   public FileUpload3(FileServer fileServer) {
     this.fileServer = fileServer;

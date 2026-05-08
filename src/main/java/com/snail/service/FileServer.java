@@ -37,7 +37,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Component
 public class FileServer {
 
-  private static final Logger logger = LoggerFactory.getLogger(FileServer.class);
+  private static final Logger LOGGER  = LoggerFactory.getLogger(FileServer.class);
 
   private final RestTemplate restTemplate;
   public static final String HOST = "http://192.168.10.10:808";
@@ -61,7 +61,7 @@ public class FileServer {
       throws Exception {
     String targetUrl = buildTargetUrl(HOST1, FILE_UPLOAD_PATH);
 
-    logger.info("file upload request to {}", targetUrl);
+    LOGGER .info("file upload request to {}", targetUrl);
     HttpHeaders headers = buildForwardHeaders();
     headers.setContentType(MediaType.MULTIPART_FORM_DATA);
     MultiValueMap<String, Object> requestBody = buildUploadRequestBody(stream, filename);
@@ -76,7 +76,7 @@ public class FileServer {
       throws Exception {
     String targetUrl = buildTargetUrl(HOST, TEST_FILE_UPLOAD_PATH);
 
-    logger.info("file upload request to {}", targetUrl);
+    LOGGER .info("file upload request to {}", targetUrl);
     HttpHeaders headers = buildForwardHeaders();
     headers.setContentType(MediaType.MULTIPART_FORM_DATA);
     MultiValueMap<String, Object> requestBody = buildUploadRequestBody(stream, filename);
@@ -91,7 +91,7 @@ public class FileServer {
 
     String targetUrl =
         buildTargetUrl(HOST1, FILE_DOWNLOAD_PATH) + "?fileId=" + fileId;
-    logger.info("file download request to {}", targetUrl);
+    LOGGER .info("file download request to {}", targetUrl);
     HttpHeaders headers = buildForwardHeaders();
 
     return executeGetRequest(targetUrl, headers , uuidStr);
@@ -103,7 +103,7 @@ public class FileServer {
   public void deleteRequest(Long fileId) throws Exception {
 
     String targetUrl = buildTargetUrl(HOST1, API_URL + FILE_DELETE_PATH) + "?fileId=" + fileId;
-    logger.info("file delete request to {}", targetUrl);
+    LOGGER .info("file delete request to {}", targetUrl);
     HttpHeaders headers = buildForwardHeaders();
     try {
       ResponseEntity<Void> response =
@@ -130,7 +130,7 @@ public class FileServer {
 
     String targetUrl = buildTargetUrl(HOST1, FILE_UPLOAD_SPLIT_PATH);
 
-    logger.info("file uploadSplit request to {}", targetUrl);
+    LOGGER .info("file uploadSplit request to {}", targetUrl);
     if (attributes == null) {
       throw new IllegalStateException("当前不在请求上下文中，无法获取请求头");
     }
@@ -293,9 +293,9 @@ public class FileServer {
                   // 立即删除临时文件，避免/tmp目录被写满
                   boolean deleted = tempFile.delete();
                   if (!deleted) {
-                    logger.warn("Failed to delete temp file: {}", tempFile.getAbsolutePath());
+                    LOGGER .warn("Failed to delete temp file: {}", tempFile.getAbsolutePath());
                   } else {
-                    logger.debug("Deleted temp file: {}", tempFile.getAbsolutePath());
+                    LOGGER .debug("Deleted temp file: {}", tempFile.getAbsolutePath());
                   }
                 }
               }
